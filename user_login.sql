@@ -11,5 +11,3 @@ CREATE TABLE if not exists user_info (
     password varchar(75) NOT NULL,
     created_at timestamp default CURRENT_TIMESTAMP NOT NULL
 );
-
-
