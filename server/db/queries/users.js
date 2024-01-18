@@ -47,14 +47,14 @@ export const checkUsernameExists = async (email, username) => {
 export const addNewUser = async (first_name, last_name, email, username, password) => {
     try {
         //check if email and/or username exists 
-        
+        if (checkEmailExists(email) || checkUsernameExists(username)) { //possible to go in api
 
-        const hash = await bcrypt.hash(password, 10)
+        }
 
         const [user] = await pool.query(`
             INSERT INTO user_info (first_name, last_name, email, username, password)
                 VALUES (?, ?, ?, ?, ?);`,
-                [first_name, last_name, email, username, hash]
+                [first_name, last_name, email, username, password]
               )
         return user
     } catch (error) {
@@ -63,4 +63,3 @@ export const addNewUser = async (first_name, last_name, email, username, passwor
     }
 }
 
-console.log(await checkEmailExists('tst@email.com'))
