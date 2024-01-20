@@ -63,3 +63,14 @@ export const addNewUser = async (first_name, last_name, email, username, passwor
     }
 }
 
+export const findUser = async (username) => {
+    try {
+       const [user] = await pool.query(`
+       SELECT * FROM user_info WHERE username = ?
+       `, [username])
+       return user
+    } catch (error) {
+        console.error(`Trouble finding this user: ${error}`)
+    }
+}
+
